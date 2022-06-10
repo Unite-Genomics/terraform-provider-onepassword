@@ -50,7 +50,7 @@ const (
 	enumDescription = "%s One of %q"
 )
 
-var categories = []string{"login", "password", "database"}
+var categories = []string{"login", "password", "database", "server"}
 var dbTypes = []string{"db2", "filemaker", "msaccess", "mssql", "mysql", "oracle", "postgresql", "sqlite", "other"}
 var fieldPurposes = []string{"USERNAME", "PASSWORD", "NOTES"}
 var fieldTypes = []string{"STRING", "EMAIL", "CONCEALED", "URL", "OTP", "DATE", "MONTH_YEAR", "MENU"}
@@ -537,6 +537,8 @@ func dataToItem(data *schema.ResourceData) (*onepassword.Item, error) {
 				Value: data.Get("type").(string),
 			},
 		}
+	case "server":
+		item.Category = onepassword.Server
 	}
 
 	sections := data.Get("section").([]interface{})
